@@ -1,0 +1,5 @@
+{
+    "title": "Astro Netlify Boilerplate",
+    "description": "A template for building a simple blog website with the Astro, Netlify CMS, and with deployment to Netlify.",
+    "url": "https://demo-astro-netlify-cms.netlify.app"
+}

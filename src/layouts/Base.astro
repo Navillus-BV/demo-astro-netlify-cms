@@ -1,20 +1,31 @@
 ---
+import Footer from '../components/Footer.astro';
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
+import metadata from '../data/metadata.json';
 
-export let title = 'Astro';
+export let description = metadata.description;
+export let title = metadata.title;
+export let section: string;
 ---
 
-<html lang="en">
+<html lang="en" data-current={section}>
     <MainHead title={title} />
 <head>
     
 </head>
 <body>
-    <main>
+    <header>
+        <em>
+            <a href="/">{metadata.title}</a>
+        </em>
         <Nav />
+    </header>
 
+    <main>
         <slot />
     </main>
+
+    <Footer />
 </body>
 </html>

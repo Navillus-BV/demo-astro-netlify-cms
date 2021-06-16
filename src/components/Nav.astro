@@ -1,15 +1,28 @@
-<header>
-    <div>
-        <img width="60" height="80" src="/assets/logo.svg" alt="Astro logo">
-        <h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
-    </div>
-</header>
-
-<style>
-    header {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-        max-width: min(100%, 68ch);
+---
+const navPages = [
+    {
+        url: '/',
+        title: 'Home'
+    },
+    {
+        url: '/about',
+        title: 'About'
+    },
+    {
+        url: '/blog',
+        title: 'Blog'
+    },
+    {
+        url: '/contact',
+        title: 'Contact'
     }
-</style>
+]
+---
+
+<nav>
+    {navPages.map(({ title, url }) => (
+        <li>
+            <a href={url}>{title}</a>
+        </li>
+    ))}
+</nav>

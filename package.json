@@ -1,10 +1,25 @@
 {
-  "name": "-temp",
+  "name": "demo-astro-netlify-cms",
   "version": "0.0.1",
+  "description": "A boilerplate for building a fast static website with the Astro and Netlify CMS.",
   "scripts": {
     "start": "astro dev",
-    "build": "astro build"
+    "build": "astro build --verbose"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/navillus-bv/demo-astro-netlify-cms"
+  },
+  "author": {
+    "name": "Tony Sullivan",
+    "email": "tony@navillus.nl",
+    "url": "https://navillus.dev/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/navillus-bv/demo-astro-netlify-cms/issues"
+  },
+  "homepage": "https://github.com/navillus-bv/demo-astro-netlify-cms",
   "devDependencies": {
     "astro": "latest"
   }
