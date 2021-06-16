@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/Post.astro"
 title: This is the fourth example post
 date: 2020-02-03
 author: John Doe

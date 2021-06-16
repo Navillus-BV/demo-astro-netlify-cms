@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/Post.astro"
 title: The fifth and hopefully final example post
 date: 2020-10-15T12:23:39.598Z
 author: Jane Doe

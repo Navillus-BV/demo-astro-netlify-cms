@@ -1,0 +1,37 @@
+---
+import Layout from './Base.astro';
+import TagsList from '../components/TagsList.astro';
+import { machineDate, readableDate } from '../utils/dates';
+import { slug } from '../utils/slug';
+
+export let content: {
+    date: string,
+    summary: string,
+    section: string,
+    title: string,
+    tags: string[]
+}
+
+const authorUrl = `/authors/${content.author}`;
+---
+
+<Layout title={content.title} description={content.summary}>
+  <article>
+    <h1>{content.title}</h1>
+    <p>
+      <small>
+        <time datetime={machineDate(content.date)}>{readableDate(content.date)}</time> by <a href={authorUrl}>{content.author}</a>
+      </small>
+    </p>
+
+    <slot />
+
+    {content.tags && (
+      <TagsList tags={content.tags} />
+    )}
+  </article>
+
+  <nav>
+    <a href='/blog'>← Blog index</a>
+  </nav>
+</Layout>
