@@ -1,0 +1,20 @@
+---
+import MainHead from '../components/MainHead.astro';
+import Nav from '../components/Nav.astro';
+
+export let title = 'Astro';
+---
+
+<html lang="en">
+    <MainHead title={title} />
+<head>
+    
+</head>
+<body>
+    <main>
+        <Nav />
+
+        <slot />
+    </main>
+</body>
+</html>
