@@ -1,0 +1,45 @@
+---
+import PostPreview from '../components/PostPreview.astro';
+import Layout from '../layouts/Base.astro';
+import metadata from '../data/metadata.json';
+
+const title = 'Blog';
+const description = 'A sample Blog page listing various posts and authors.';
+
+export let collection: any;
+
+export async function createCollection() {
+    return {
+        /** Load posts, sort newest -> oldest */
+        async data() {
+            const allPosts = Astro.fetchContent('./posts/*.md');
+            return allPosts
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+        },
+
+        /** Set page size */
+        pageSize: 10,
+        
+        /** Generate RSS feed (only for main /posts/ feed) */
+        rss: {
+            title: `Blog | ${metadata.title}`,
+            description: metadata.description,
+            customDate: '<language>en-us</language>',
+            item: (item) => ({
+                title: item.title,
+                description: item.description,
+                link: item.url,
+                pubDate: item.date,
+            })
+        }
+    }
+}
+---
+
+<Layout title={title} description={description}>
+    <h1>{title}</h1>
+
+    {collection.data.map((post) => (
+        <PostPreview post={post} />
+    ))}
+</Layout>

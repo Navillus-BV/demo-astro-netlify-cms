@@ -1,0 +1,33 @@
+---
+import TagsList from './TagsList.astro';
+import { machineDate, readableDate } from '../utils/dates';
+import { slug } from '../utils/slug';
+
+export let post: {
+    url: string,
+    title: string,
+    date: string,
+    summary: string,
+    author: string,
+    tags: string[]
+}
+---
+
+<article>
+    <h3>
+        <a href={post.url}>
+            {post.title}
+        </a>
+    </h3>
+    {post.summary && (
+        <p>{post.summary}</p>
+    )}
+    <p>
+        <time datetime={machineDate(post.date)}>
+            <small>{readableDate(post.date)} by <a href={`/authors/${slug(post.author)}/`}>{post.author}</a></small>
+        </time>
+    </p>
+    {post.tags && (
+        <TagsList tags={post.tags} />
+    )}
+</article>

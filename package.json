@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/navillus-bv/demo-astro-netlify-cms",
   "devDependencies": {
-    "astro": "latest"
+    "astro": "latest",
+    "luxon": "^1.27.0",
+    "slugify": "^1.5.3"
   }
 }

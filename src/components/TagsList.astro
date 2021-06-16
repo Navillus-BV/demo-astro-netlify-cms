@@ -1,0 +1,11 @@
+---
+export let tags: string[];
+
+const tagUrl = (tag) => `/tags/${tag}`
+---
+
+<p>
+    {tags.map(tag => (
+        <a rel="tag" href={tagUrl(tag)}>{tag}</a>
+    ))}
+</p>
