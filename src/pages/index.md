@@ -1,10 +1,8 @@
 ---
 layout: "../layouts/Page.astro"
-title: Home
+title: Welcome
 section: home
 ---
-
-# Welcome
 
 This is a template for building a simple blog website with the [Astro](https://astro.build), with deployment to [Netlify](https://www.netlify.com).
 
