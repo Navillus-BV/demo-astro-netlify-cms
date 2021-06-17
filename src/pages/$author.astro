@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Page.astro';
+import metadata from '../data/metadata.json';
+import { slug } from '../utils/slug';
+
+export let collection: any;
+
+const title = (author) => `Posts by ${ author }`;
+const description = (author) => `An archive of all posts by the author: ${author}`;
+
+export async function createCollection() {
+    const allPosts = Astro.fetchContent('./posts/*.md');
+    const authorsSet = new Set(allPosts.map(p => p.author));
+    const allAuthors = [...authorsSet].sort();
+
+    return {
+        // `routes` defines the total collection of routes as data objects.
+        routes: allAuthors.map((author, i) => ({
+            name: author,
+            index: i
+        })),
+
+        // `permalink` defines the final URL for each route object defined in `routes`.
+        permalink: ({ params }) => `/authors/${slug(params.name)}`,
+
+        // `data` is now responsible for return the data for each page.
+        // Luckily we had already loaded all of the data at the top of the function,
+        // so we just filter the data here to group pages by first letter.
+        // If you needed to fetch more data for each page, you can do that here as well.
+
+        async data ({ params }) {
+            console.log('data() params: ', params);
+            return allAuthors[params.index];
+        },
+
+        // Note: The default pageSize is fine because technically only one data object
+        // is ever returned per route. We set it to Infinity in this example for completeness.
+        pageSize: Infinity,
+    }
+}
+---
+
+<Layout title={title(collection.params.name)} description={description(collection.params.name)}>
+
+</Layout>
