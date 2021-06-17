@@ -21,7 +21,11 @@ export async function createCollection() {
         })),
 
         // `permalink` defines the final URL for each route object defined in `routes`.
-        permalink: ({ params }) => `/authors/${slug(params.name)}`,
+        permalink: ({ params }) => {
+            const result = `/authors/${slug(params.name)}`
+            console.log(`permalink: ${result}`)
+            return result
+        },
 
         // `data` is now responsible for return the data for each page.
         // Luckily we had already loaded all of the data at the top of the function,
