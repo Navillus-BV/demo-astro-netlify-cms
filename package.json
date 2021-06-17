@@ -4,7 +4,7 @@
   "description": "A boilerplate for building a fast static website with the Astro and Netlify CMS.",
   "scripts": {
     "start": "astro dev",
-    "build": "astro build --verbose"
+    "build": "astro build"
   },
   "repository": {
     "type": "git",
