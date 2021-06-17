@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Base.astro';
+import metadata from '../data/metadata.json';
+import { slug } from '../utils/slug';
+
+export let title = 'Authors';
+export let description: "This page lists all of the Blog's authors";
+
+export let collection: any;
+
+export async function createCollection() {
+    return {
+        /** Load posts, sort newest -> oldest */
+        async data() {
+            const allPosts = Astro.fetchContent('./posts/*.md');
+            const authorsSet = allPosts
+                .map(p => p.author)
+                .reduce((acc, next) => {
+                    acc.add(next)
+                    return acc
+                }, new Set());
+
+            return Array.from(authorsSet.keys())
+                .sort();
+        },
+
+        /** Set page size */
+        pageSize: 10,
+    }
+}
+---
+
+<Layout title={title} description={description}>
+    <h1>{title}</h1>
+
+    <section>
+        {collection.data.map((author) => (
+            <article>
+                <h3>
+                    <a href={`/authors/${slug(author)}`}>{author}</a>
+                </h3>
+            </article>
+        ))}
+        <nav>
+            <a href="/blog">← Blog index</a>
+        </nav>
+    </section>
+</Layout>
