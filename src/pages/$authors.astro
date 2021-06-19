@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Page.astro';
+import Layout from '../layouts/Base.astro';
 import metadata from '../data/metadata.json';
 import { slug } from '../utils/slug';
 
-export let title = 'Authors';
-export let description: "This page lists all of the Blog's authors";
+export let title = "Authors";
+export let description = "This page lists all of the Blog's authors";
 
 export let collection: any;
 
@@ -13,7 +13,9 @@ export async function createCollection() {
         /** Load posts, sort newest -> oldest */
         async data() {
             const allPosts = Astro.fetchContent('./posts/*.md');
-            const allAuthors = uniq(allPosts.map(p => p.author));
+            const allAuthors = Array.from(
+                new Set(allPosts.map(p => p.author))
+            );
 
             return allAuthors.sort();
         },
@@ -25,11 +27,13 @@ export async function createCollection() {
 ---
 
 <Layout title={title} description={description}>
+    <h1>{title}</h1>
+
     <section>
         {collection.data.map((author) => (
             <article>
                 <h3>
-                    <a href={`/authors/${slug(author)}`}>{author}</a>
+                    <a href={`/author/${slug(author)}`}>{author}</a>
                 </h3>
             </article>
         ))}
