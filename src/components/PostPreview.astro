@@ -24,7 +24,7 @@ export let post: {
     )}
     <p>
         <time datetime={machineDate(post.date)}>
-            <small>{readableDate(post.date)} by <a href={`/authors/${slug(post.author)}/`}>{post.author}</a></small>
+            <small>{readableDate(post.date)} by <a href={`/author/${slug(post.author)}/`}>{post.author}</a></small>
         </time>
     </p>
     {post.tags && (

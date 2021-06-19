@@ -13,7 +13,7 @@ export let content: {
     tags: string[]
 }
 
-const authorUrl = `/authors/${content.author}`;
+const authorUrl = `/author/${slug(content.author)}`;
 ---
 
 <Layout title={content.title} description={content.description}>
