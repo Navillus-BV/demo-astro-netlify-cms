@@ -1,0 +1,62 @@
+---
+import PostPreview from '../components/PostPreview.astro';
+import Layout from '../layouts/Base.astro';
+import metadata from '../data/metadata.json';
+import { slug } from '../utils/slug';
+import { uniq } from '../utils/uniq';
+
+export let collection: any;
+
+export async function createCollection() {
+    const allPosts = Astro.fetchContent('./posts/*.md');
+
+    const allTags = uniq(
+        allPosts
+            .map(({ tags }) => tags)
+            .flat()
+    );
+
+    const title = (tag) => `Tagged “${tag}”`;
+    const description = (tag) => `All posts from the Blog tagged with “${tag}”`;
+
+    return {
+        // `routes` defines the total collection of routes as data objects.
+        routes: allTags.map((tag) => {
+            const params = {
+                name: tag,
+                title: title(tag),
+                description: description(tag),
+            };
+            return params;
+        }),
+
+        // `permalink` defines the final URL for each route object defined in `routes`.
+        permalink: ({ params }) => `/tags/${slug(params.name)}`,
+
+        // `data` is now responsible for return the data for each page.
+        // Luckily we had already loaded all of the data at the top of the function,
+        // so we just filter the data here to group pages by first letter.
+        // If you needed to fetch more data for each page, you can do that here as well.
+        async data ({ params }) {
+            return allPosts.filter(p => p.tags.indexOf(params.name) >= 0);
+        },
+
+        // Finally, `pageSize` and `pagination` is still on by default. Because
+        // we don't want to paginate the already-grouped pages a second time, we'll
+        // disable pagination.
+        pageSize: 10,
+    }
+}
+---
+
+<Layout title={collection.params.title} description={collection.params.description}>
+    <h1>{collection.params.title}</h1>
+
+    {collection.data.map((post) => (
+        <PostPreview post={post} />
+    ))}
+
+    <nav>
+        <a href="/blog">← Blog index</a>
+    </nav>
+</Layout>
