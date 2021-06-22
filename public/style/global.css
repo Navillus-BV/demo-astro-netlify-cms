@@ -90,22 +90,6 @@ header > em {
   font-style: normal;
 }
 
-/* Header Nav */
-
-
-/* Posts List */
-article {
-  margin-bottom: 1em;
-  padding-bottom: 1em;
-  border-bottom: 1px solid #eee;
-  border-bottom: 1px solid var(--secondary);
-}
-
-main > section > article > * {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-}
-
 /* Post Tags */
 a[rel="tag"],
 a[rel="tag"]:visited {

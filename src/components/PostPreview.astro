@@ -31,3 +31,17 @@ export let post: {
         <TagsList tags={post.tags} />
     )}
 </article>
+
+<style lang="scss">
+    article {
+        margin-bottom: 1em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--secondary);
+
+        & > * {
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+    }
+</style>
