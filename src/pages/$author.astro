@@ -3,22 +3,21 @@ import PostPreview from '../components/PostPreview.astro';
 import Layout from '../layouts/Base.astro';
 import metadata from '../data/metadata.json';
 import { slug } from '../utils/slug';
+import { uniq } from '../utils/uniq';
 
 export let collection: any;
 
 export async function createCollection() {
     const allPosts = Astro.fetchContent('./posts/*.md');
 
-    const allAuthors = Array.from(
-        new Set(allPosts.map(p => p.author))
-    );
+    const allAuthors = uniq(allPosts.map(({ author }) => author));
 
     const title = (author) => `Posts by ${ author }`;
     const description = (author) => `An archive of all posts by the author: ${author}`;
 
     return {
         // `routes` defines the total collection of routes as data objects.
-        routes: allAuthors.sort().map((author) => {
+        routes: allAuthors.map((author) => {
             const params = {
                 name: author,
                 title: title(author),
@@ -28,9 +27,7 @@ export async function createCollection() {
         }),
 
         // `permalink` defines the final URL for each route object defined in `routes`.
-        permalink: ({ params }) => {
-            return `/author/${slug(params.name)}`;
-        },
+        permalink: ({ params }) => `/author/${slug(params.name)}`,
 
         // `data` is now responsible for return the data for each page.
         // Luckily we had already loaded all of the data at the top of the function,
@@ -49,6 +46,8 @@ export async function createCollection() {
 ---
 
 <Layout title={collection.params.title} description={collection.params.description}>
+    <h1>{collection.params.title}</h1>
+
     {collection.data.map((post) => (
         <PostPreview post={post} />
     ))}
