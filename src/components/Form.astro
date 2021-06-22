@@ -7,3 +7,36 @@
   <textarea name="message" id="message" placeholder="Write your message here" rows="7" required></textarea>
   <button type="submit">Send Message</button>
 </form>
+
+<style lang="scss">
+  form {
+    display: grid;
+    padding: 2em 0;
+  }
+
+  label {
+    display: none;
+  }
+
+  input,
+  textarea,
+  button {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 1em;
+    font-size: 1rem;
+    font-family: "Avenir", "Avenir Next", sans-serif;
+  }
+
+  input,
+  textarea {
+    border: 1px solid black;
+  }
+
+  button {
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+    color: var(--secondary);
+    cursor: pointer;
+  }
+</style>
