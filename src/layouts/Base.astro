@@ -10,16 +10,15 @@ export let section: string;
 ---
 
 <html lang="en" data-current={section}>
+  <head>
     <MainHead title={title} />
-<head>
-    
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <em>
-            <a href="/">{metadata.title}</a>
-        </em>
-        <Nav />
+      <em>
+        <a href="/">{metadata.title}</a>
+      </em>
+      <Nav />
     </header>
 
     <main>
@@ -27,5 +26,17 @@ export let section: string;
     </main>
 
     <Footer />
-</body>
+  </body>
 </html>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
