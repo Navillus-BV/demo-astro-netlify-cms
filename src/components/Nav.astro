@@ -26,3 +26,32 @@ const navPages = [
         </li>
     ))}
 </nav>
+
+<style lang="scss">
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+        margin: 0 0.25em;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    a {
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
+
+        &[href]:not(:hover) {
+            text-decoration: none;
+        }
+
+        &[data-current="current item"] {
+            background-color: white;
+        }
+    }
+</style>
