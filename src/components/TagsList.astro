@@ -9,3 +9,33 @@ const tagUrl = (tag) => `/tags/${tag}`
         <a rel="tag" href={tagUrl(tag)}>{tag}</a>
     ))}
 </p>
+
+<style lang="scss">
+    a,
+    a:visited {
+        display: inline-block;
+        vertical-align: text-top;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.625em;
+        padding: 0 0.5em;
+        line-height: 2em;
+        height: 2em;
+        border: 1px solid var(--secondary);
+        background-color: var(--secondary);
+        color: var(--primary);
+        border-radius: 0.25em;
+        text-decoration: none;
+        margin: 0 0.5em 0.5em 0;
+
+        &:hover {
+            border: 1px solid var(--primary);
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+</style>
